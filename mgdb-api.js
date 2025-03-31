@@ -4,13 +4,13 @@ const Customer = require("./models/Customer");
 const app = express();
 app.use(express.json());
 
-// API: Lấy danh sách khách hàng
+// api lấy danh sách
 app.get("/DKP-test", async (req, res) => {
     const customers = await Customer.find();
     res.json(customers);
 });
 
-// API: Thêm khách hàng mới
+// api thêm
 app.post("/DKP-test", async (req, res) => {
     try {
         const newCustomer = new Customer(req.body);
@@ -21,7 +21,7 @@ app.post("/DKP-test", async (req, res) => {
     }
 });
 
-// API: Cập nhật thông tin 
+// api cập nhật
 app.put("/DKP-test/:id", async (req, res) => {
     try {
         const updatedCustomer = await Customer.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -31,7 +31,7 @@ app.put("/DKP-test/:id", async (req, res) => {
     }
 });
 
-// API: Xóa
+// api xóa
 app.delete("/customers/:id", async (req, res) => {
     await Customer.findByIdAndDelete(req.params.id);
     res.json({ message: "Khách hàng đã bị xóa!" });
